@@ -30,7 +30,7 @@ public class ContractService {
     @Transactional
     public ContractEntity createNew(ContractEntity contract) throws Exception {
         // Save customer credit first
-        contract.setStatus("PENDING");
+        contract.setStatus("pending");
         contract.setCreationDate(new Date());
         contractRepository.save(contract);
         startNewProcess(contract);
@@ -58,7 +58,7 @@ public class ContractService {
             .block();
 
         contract.setProcessInstanceId(processInstance.getRootProcessInstanceId());
-        contract.setStatus("CREATE");
+        contract.setStatus("Contract_Create");
         contractRepository.save(contract);
     }
     

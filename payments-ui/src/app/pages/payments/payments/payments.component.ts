@@ -9,7 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrls: ['./payments.component.scss']
 })
 export class PaymentsComponent implements OnInit {
-  displayedColumns: string[] = ['firstName', 'lastName', 'paymentAmount', 'paymentStatus', 'paymentDate', 'creationDate', "actions"];
+  displayedColumns: string[] = ['contractNo', 'firstName', 'lastName', 'paymentAmount', 'id', 'paymentStatus', 'paymentDate', 'creationDate', "actions"];
 
   dataSource!: MatTableDataSource<any>;
 

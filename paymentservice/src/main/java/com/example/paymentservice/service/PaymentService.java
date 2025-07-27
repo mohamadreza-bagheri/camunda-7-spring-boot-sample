@@ -50,16 +50,18 @@ public class PaymentService {
 
     @Transactional
     public PaymentEntity completeTask(CamundaRequestModel requestModel, String action, Long id) throws Exception {
-        Map<String, Object> variables = new HashMap<>();
-        variables.put("action", action);
-        variables.put("paymentId", id);
-
         PaymentEntity payment;
         if (id == null || id == 0L) {
             payment = createNew(requestModel.getProcessInstanceId());
         } else {
             payment = paymentRepository.findById(id).orElse(null);
         }
+        if (payment == null)
+            throw new Exception("payment data not exists!");
+
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("action", action);
+        variables.put("paymentId", payment.getId());
 
         requestModel.setVariables(variables);
 

@@ -63,8 +63,8 @@ public class MyTaskService {
 
         String topic = "";
         if (task.getTaskDefinitionKey().equals("Contract_Create")
-                || task.getName().equals("Contract_Approve_1")
-                || task.getName().equals("Contract_Approve_2")
+                || task.getTaskDefinitionKey().equals("Contract_Approve_1")
+                || task.getTaskDefinitionKey().equals("Contract_Approve_2")
         )
             topic = "contract-topic";
         else

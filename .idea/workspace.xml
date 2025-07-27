@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0034cf5-a7d2-4252-af19-f409ba91ecff" name="Changes" comment="init branch develop" />
+    <list default="true" id="a0034cf5-a7d2-4252-af19-f409ba91ecff" name="Changes" comment="init branch develop">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/camundaservice/src/main/java/com/example/camundaservice/service/MyTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/camundaservice/src/main/java/com/example/camundaservice/service/MyTaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contractservice/src/main/java/com/example/contractservice/service/ContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/contractservice/src/main/java/com/example/contractservice/service/ContractService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-ui/src/app/pages/payments/payments/payments.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/payments-ui/src/app/pages/payments/payments/payments.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-ui/src/app/pages/payments/payments/payments.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/payments-ui/src/app/pages/payments/payments/payments.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paymentservice/src/main/java/com/example/paymentservice/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentservice/src/main/java/com/example/paymentservice/service/PaymentService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,19 +37,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/spring-project/camunda-7-spring-boot-sample/contracts-ui&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\spring-project\\camunda-7-spring-boot-sample\\payments-ui\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.CamundaServiceApplication.executor": "Debug",
+    "Spring Boot.ContractServiceApplication.executor": "Debug",
+    "Spring Boot.PaymentServiceApplicationd.executor": "Run",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "E:/spring-project/camunda-7-spring-boot-sample/contracts-ui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.contracts-ui.executor": "Run",
+    "npm.payments-ui.executor": "Run",
+    "run.configurations.included.in.services": "true",
+    "ts.external.directory.path": "E:\\spring-project\\camunda-7-spring-boot-sample\\contracts-ui\\node_modules\\typescript\\lib"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\spring-project\camunda-7-spring-boot-sample\contracts-ui" />
@@ -51,7 +78,10 @@
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
         <option value="SpringBootApplicationConfigurationType" />
+        <option value="js.build_tools.npm" />
       </set>
     </option>
   </component>
@@ -114,6 +144,7 @@
       <option name="presentableId" value="Default" />
       <updated>1753600408166</updated>
       <workItem from="1753600409434" duration="430000" />
+      <workItem from="1753601973074" duration="3048000" />
     </task>
     <task id="LOCAL-00001" summary="first push">
       <option name="closed" value="true" />
