@@ -4,114 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c6d829b-8895-4400-879a-89f4f8e4832c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/camundaservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/camundaservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contractservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/contractservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paymentservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="a0034cf5-a7d2-4252-af19-f409ba91ecff" name="Changes" comment="first push">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payments-ui/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/payments-ui/angular.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
-  <component name="ProjectId" id="30RnavWAyk1rvsPYbYWtOXPAg7n" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/spring-project/camunda-7-spring-boot-sample",
-    "nodejs_package_manager_path": "npm",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "ts.external.directory.path": "E:\\spring-project\\camunda-7-spring-boot-sample\\payments-ui\\node_modules\\typescript\\lib"
   }
 }]]></component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="MicronautRunConfigurationType" />
-        <option value="QuarkusRunConfigurationType" />
-        <option value="SpringBootApplicationConfigurationType" />
-        <option value="js.build_tools.npm" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="npm.payments-ui">
-    <configuration name="CamundaServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="camundaservice" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.camundaservice.CamundaServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContractServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="contractservice" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.contractservice.ContractServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="paymentservice" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.paymentservice.PaymentServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="contracts-ui" type="js.build_tools.npm">
-      <package-json value="$PROJECT_DIR$/contracts-ui/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="payments-ui" type="js.build_tools.npm">
-      <package-json value="$PROJECT_DIR$/payments-ui/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="npm.contracts-ui" />
-      <item itemvalue="npm.payments-ui" />
-      <item itemvalue="Spring Boot.CamundaServiceApplication" />
-      <item itemvalue="Spring Boot.ContractServiceApplication" />
-      <item itemvalue="Spring Boot.PaymentServiceApplication" />
-    </list>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="4c6d829b-8895-4400-879a-89f4f8e4832c" name="Changes" comment="" />
-      <created>1753599320077</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1753599320077</updated>
-      <workItem from="1753599320991" duration="228000" />
-    </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first push" />
+    <option name="LAST_COMMIT_MESSAGE" value="first push" />
   </component>
 </project>
