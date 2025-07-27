@@ -1,0 +1,83 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: camunda-service
+  messages:
+    encoding: UTF-8
+#  datasource:
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@//coredevdb.tamin.org:1521/malicore.tamin.org
+#    username: hamta
+#    password: hamta
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:sqlserver://localhost:1433;database=CamundaDb;encrypt=false
+    username: SA
+    password: a123456B
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+#    hikari:
+#      auto-commit: false
+#      maximum-pool-size: 5
+#  batch:
+#    jdbc:
+#      isolation-level-for-create: default
+  jpa:
+    hibernate:
+      ddl-auto: none
+#      database-platform: org.hibernate.dialect.Oracle12cDialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    properties:
+#      hibernate:
+#        jdbc:
+#          batch_size: 500
+#        order_inserts: true
+#        order_updates: true
+    show-sql: true
+#  data:
+#    jdbc:
+#      dialect: oracle
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+      properties:
+        delivery.timeout.ms: 120000
+        request.timeout.ms: 60000
+
+camunda:
+  bpm:
+#    authorization:
+#      enabled: true
+    admin-user:
+      id: admin
+      password: admin
+    database:
+      schema-update: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
+        web: DEBUG
+        jdbc:
+          core:
+            JdbcTemplate: DEBUG
+            StatementCreatorUtils: TRACE

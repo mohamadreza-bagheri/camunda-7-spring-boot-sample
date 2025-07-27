@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions 
+                xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                id="Definitions_1"
+                targetNamespace="http://bpmn.io/schema/bpmn"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:camunda="http://camunda.org/schema/1.0/bpmn">
+
+<!--     xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"  -->
+<!--     xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"  -->
+<!--     xmlns:di="http://www.omg.org/spec/DD/20100524/DI"  -->
+<!--     xmlns:modeler="http://camunda.org/schema/modeler/1.0"  -->
+<!--     exporter="Camunda Modeler" -->
+<!--     exporterVersion="5.37.0"  -->
+<!--     modeler:executionPlatform="Camunda Platform"  -->
+<!--     modeler:executionPlatformVersion="7.23.0" -->
+    
+  <bpmn:process id="Process_Contract" isExecutable="true" camunda:historyTimeToLive="P60D">
+  
+    <bpmn:startEvent id="StartEvent_1" name="شروع فرایند">
+      <bpmn:outgoing>Flow_Create_Contract</bpmn:outgoing>
+    </bpmn:startEvent>
+
+    <bpmn:sequenceFlow id="Flow_Create_Contract" name="آغاز ایجاد قرارداد" sourceRef="StartEvent_1" targetRef="Contract_Create" />
+
+    <bpmn:userTask id="Contract_Create" name="ایجاد قرارداد" camunda:candidateGroups="payman_karan">
+       <bpmn:documentation>
+          این تسک توسط گروه پرداخت کاران انجام می‌شود.
+          مسئولیت ایجاد قرارداد جدید با تمام جزئیات.
+       </bpmn:documentation>
+      <bpmn:incoming>Flow_Create_Contract</bpmn:incoming>
+      <bpmn:outgoing>Flow_Check_Data</bpmn:outgoing>
+    </bpmn:userTask>
+
+
+    <bpmn:sequenceFlow id="Flow_Check_Data" name="بررسی/اصلاح و تایید اطلاعات" sourceRef="Contract_Create" targetRef="Gateway_Decision" />
+
+    <bpmn:exclusiveGateway id="Gateway_Decision" name="تایید نهایی پیمانکار">
+      <bpmn:incoming>Flow_Check_Data</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approve</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Reject</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:sequenceFlow id="Flow_Approve" name="تایید اطلاعات" sourceRef="Gateway_Decision" targetRef="Contract_Approve_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'approve'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:sequenceFlow id="Flow_Reject" name="انصراف" sourceRef="Gateway_Decision" targetRef="Contract_Reject">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!action == 'reject' || action == 'disapprove'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    
+    <bpmn:userTask id="Contract_Approve_1" name="تایید معاونت اداری" camunda:candidateGroups="moavenat_edari">
+      <bpmn:incoming>Flow_DisApprove_2</bpmn:incoming>
+      <bpmn:incoming>Flow_Approve</bpmn:incoming>
+      <bpmn:outgoing>Flow_Decision_1</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:sequenceFlow id="Flow_Decision_1" name="ارسال به معاونت اداری" sourceRef="Contract_Approve_1" targetRef="Gateway_Decision_1" />
+
+    <bpmn:exclusiveGateway id="Gateway_Decision_1" name="تصمیم گیری معاونت اداری">
+      <bpmn:incoming>Flow_Decision_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approve_1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Reject_1</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:sequenceFlow id="Flow_Approve_1" name="تایید معاونت اداری" sourceRef="Gateway_Decision_1" targetRef="Contract_Approve_2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'approve'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Reject_1" name="لغو توسط معاونت اداری" sourceRef="Gateway_Decision_1" targetRef="Contract_Reject">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'reject' || action == 'disapprove'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    
+    <bpmn:userTask id="Contract_Approve_2" name="تایید مدیرعامل" camunda:candidateGroups="modir_amel">
+      <bpmn:incoming>Flow_Approve_1</bpmn:incoming>
+      <bpmn:incoming>Flow_Pay_DisApprove_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_Decision_2</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:sequenceFlow id="Flow_Decision_2" name="ارسال به مدیرعامل" sourceRef="Contract_Approve_2" targetRef="Gateway_Decision_2" />
+    
+    <bpmn:exclusiveGateway id="Gateway_Decision_2" name="تصمیم گیری مدیرعامل">
+      <bpmn:incoming>Flow_Decision_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approve_2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_DisApprove_2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Reject_2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:sequenceFlow id="Flow_Approve_2" name="تایید مدیرعامل" sourceRef="Gateway_Decision_2" targetRef="Payment_Approve_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'approve'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_DisApprove_2" name="عدم تایید مدیرعامل" sourceRef="Gateway_Decision_2" targetRef="Contract_Approve_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'disapprove'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Reject_2" name="لغو توسط مدیرعامل" sourceRef="Gateway_Decision_2" targetRef="Contract_Reject">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'reject'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:userTask id="Payment_Approve_1" name="تایید معاونت مالی" camunda:candidateGroups="moavenad_mali">
+      <bpmn:incoming>Flow_Approve_2</bpmn:incoming>
+      <bpmn:incoming>Flow_Pay_DisApprove_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pay_Decision_1</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:sequenceFlow id="Flow_Pay_Decision_1" name="ارسال به معاونت مالی" sourceRef="Payment_Approve_1" targetRef="Gateway_Pay_Decision_1" />
+    
+    <bpmn:exclusiveGateway id="Gateway_Pay_Decision_1" name="تصمیم گیری معاونت مالی">
+      <bpmn:incoming>Flow_Pay_Decision_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pay_DisApprove_1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Pay_Approve_1</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:sequenceFlow id="Flow_Pay_Approve_1" name="تایید معاونت مالی" sourceRef="Gateway_Pay_Decision_1" targetRef="Payment_Approve_2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'approve'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Pay_DisApprove_1" name="عدم تایید معاونت مالی" sourceRef="Gateway_Pay_Decision_1" targetRef="Contract_Approve_2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'disapprove'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    
+    <bpmn:userTask id="Payment_Approve_2" name="تایید ریاست مالی" camunda:candidateGroups="ryasat_mali">
+      <bpmn:incoming>Flow_Pay_Approve_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pay_Decision_2</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:sequenceFlow id="Flow_Pay_Decision_2" name="ارسال به ریاست مالی" sourceRef="Payment_Approve_2" targetRef="Gateway_Pay_Decision_2" />
+    
+    <bpmn:exclusiveGateway id="Gateway_Pay_Decision_2" name="تصمیم ریاست مالی">
+      <bpmn:incoming>Flow_Pay_Decision_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pay_Approve_2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Pay_DisApprove_2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:sequenceFlow id="Flow_Pay_Approve_2" name="تایید ریاست مالی" sourceRef="Gateway_Pay_Decision_2" targetRef="Payment">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'approve'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Pay_DisApprove_2" name="عدم تایید ریاست مالی" sourceRef="Gateway_Pay_Decision_2" targetRef="Payment_Approve_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == 'disapprove'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    
+    <bpmn:userTask id="Payment" name="پرداخت">
+      <bpmn:incoming>Flow_Pay_Approve_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Finish</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:sequenceFlow id="Flow_Finish" name="پایان فرایند" sourceRef="Payment" targetRef="End_process" />
+    
+    <bpmn:endEvent id="Contract_Reject" name="لغو درخواست">
+      <bpmn:incoming>Flow_Reject_1</bpmn:incoming>
+      <bpmn:incoming>Flow_Reject_2</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:endEvent id="End_process" name="پایان">
+      <bpmn:incoming>Flow_Finish</bpmn:incoming>
+    </bpmn:endEvent>
+
+  </bpmn:process>
+  
+<!--   <bpmndi:BPMNDiagram id="BPMNDiagram_1"> -->
+<!--     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Contract"> -->
+<!--         <bpmndi:BPMNShape id="Contract_Approve_2_di" bpmnElement="Contract_Approve_2"> -->
+<!--           <dc:Bounds x="850" y="170" width="100" height="80" /> -->
+<!--           <bpmndi:BPMNLabel /> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="End_process_di" bpmnElement="End_process"> -->
+<!--           <dc:Bounds x="1912" y="192" width="36" height="36" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1922" y="235" width="17" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Contract_Reject_di" bpmnElement="Contract_Reject"> -->
+<!--           <dc:Bounds x="1912" y="332" width="36" height="36" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1905" y="308" width="51" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Payment_di" bpmnElement="Payment"> -->
+<!--           <dc:Bounds x="1740" y="170" width="100" height="80" /> -->
+<!--           <bpmndi:BPMNLabel /> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Gateway_Pay_Decision_2_di" bpmnElement="Gateway_Pay_Decision_2" isMarkerVisible="true"> -->
+<!--           <dc:Bounds x="1625" y="185" width="50" height="50" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1616" y="235" width="69" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Payment_Approve_2_di" bpmnElement="Payment_Approve_2"> -->
+<!--           <dc:Bounds x="1460" y="170" width="100" height="80" /> -->
+<!--           <bpmndi:BPMNLabel /> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Gateway_Decision_di" bpmnElement="Gateway_Decision" isMarkerVisible="true"> -->
+<!--           <dc:Bounds x="465" y="185" width="50" height="50" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="446" y="163" width="68" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Contract_Create_di" bpmnElement="Contract_Create"> -->
+<!--           <dc:Bounds x="280" y="170" width="100" height="80" /> -->
+<!--           <bpmndi:BPMNLabel /> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1"> -->
+<!--           <dc:Bounds x="162" y="192" width="36" height="36" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="157" y="235" width="46" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Gateway_Pay_Decision_1_di" bpmnElement="Gateway_Pay_Decision_1" isMarkerVisible="true"> -->
+<!--           <dc:Bounds x="1315" y="185" width="50" height="50" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1302" y="235" width="76" height="27" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Payment_Approve_1_di" bpmnElement="Payment_Approve_1"> -->
+<!--           <dc:Bounds x="1130" y="170" width="100" height="80" /> -->
+<!--           <bpmndi:BPMNLabel /> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Gateway_Decision_2_di" bpmnElement="Gateway_Decision_2" isMarkerVisible="true"> -->
+<!--           <dc:Bounds x="1025" y="185" width="50" height="50" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1008" y="245" width="83" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Contract_Approve_1_di" bpmnElement="Contract_Approve_1"> -->
+<!--           <dc:Bounds x="590" y="170" width="100" height="80" /> -->
+<!--           <bpmndi:BPMNLabel /> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNShape id="Gateway_Decision_1_di" bpmnElement="Gateway_Decision_1" isMarkerVisible="true"> -->
+<!--           <dc:Bounds x="745" y="185" width="50" height="50" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="732" y="148" width="76" height="27" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNShape> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Approve_1_di" bpmnElement="Flow_Approve_1"> -->
+<!--           <di:waypoint x="795" y="210" /> -->
+<!--           <di:waypoint x="850" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="790" y="192" width="67" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Pay_DisApprove_1_di" bpmnElement="Flow_Pay_DisApprove_1"> -->
+<!--           <di:waypoint x="1340" y="185" /> -->
+<!--           <di:waypoint x="1340" y="110" /> -->
+<!--           <di:waypoint x="900" y="110" /> -->
+<!--           <di:waypoint x="900" y="170" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1082" y="92" width="78" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Decision_2_di" bpmnElement="Flow_Decision_2"> -->
+<!--           <di:waypoint x="950" y="210" /> -->
+<!--           <di:waypoint x="1025" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="953" y="192" width="70" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Finish_di" bpmnElement="Flow_Finish"> -->
+<!--           <di:waypoint x="1840" y="210" /> -->
+<!--           <di:waypoint x="1912" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1857" y="192" width="40" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Reject_di" bpmnElement="Flow_Reject"> -->
+<!--           <di:waypoint x="490" y="235" /> -->
+<!--           <di:waypoint x="490" y="460" /> -->
+<!--           <di:waypoint x="1930" y="460" /> -->
+<!--           <di:waypoint x="1930" y="368" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="496" y="437" width="31" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Reject_1_di" bpmnElement="Flow_Reject_1"> -->
+<!--           <di:waypoint x="770" y="235" /> -->
+<!--           <di:waypoint x="770" y="350" /> -->
+<!--           <di:waypoint x="1912" y="350" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="744" y="290" width="88" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Reject_2_di" bpmnElement="Flow_Reject_2"> -->
+<!--           <di:waypoint x="1050" y="235" /> -->
+<!--           <di:waypoint x="1050" y="390" /> -->
+<!--           <di:waypoint x="1930" y="390" /> -->
+<!--           <di:waypoint x="1930" y="368" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1455" y="372" width="73" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Pay_Approve_2_di" bpmnElement="Flow_Pay_Approve_2"> -->
+<!--           <di:waypoint x="1675" y="210" /> -->
+<!--           <di:waypoint x="1740" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1652" y="211" width="60" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Pay_Decision_2_di" bpmnElement="Flow_Pay_Decision_2"> -->
+<!--           <di:waypoint x="1560" y="210" /> -->
+<!--           <di:waypoint x="1625" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1555" y="192" width="78" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Pay_DisApprove_2_di" bpmnElement="Flow_Pay_DisApprove_2"> -->
+<!--           <di:waypoint x="1650" y="185" /> -->
+<!--           <di:waypoint x="1650" y="90" /> -->
+<!--           <di:waypoint x="1180" y="90" /> -->
+<!--           <di:waypoint x="1180" y="170" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1378" y="72" width="76" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Pay_Approve_1_di" bpmnElement="Flow_Pay_Approve_1"> -->
+<!--           <di:waypoint x="1365" y="210" /> -->
+<!--           <di:waypoint x="1460" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1382" y="192" width="62" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Check_Data_di" bpmnElement="Flow_Check_Data"> -->
+<!--           <di:waypoint x="380" y="210" /> -->
+<!--           <di:waypoint x="465" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="385" y="185" width="79" height="27" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Approve_di" bpmnElement="Flow_Approve"> -->
+<!--           <di:waypoint x="515" y="210" /> -->
+<!--           <di:waypoint x="590" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="529" y="192" width="50" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Create_Contract_di" bpmnElement="Flow_Create_Contract"> -->
+<!--           <di:waypoint x="198" y="210" /> -->
+<!--           <di:waypoint x="280" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="197" y="192" width="66" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Pay_Decision_1_di" bpmnElement="Flow_Pay_Decision_1"> -->
+<!--           <di:waypoint x="1230" y="210" /> -->
+<!--           <di:waypoint x="1315" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1235" y="192" width="80" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Approve_2_di" bpmnElement="Flow_Approve_2"> -->
+<!--           <di:waypoint x="1075" y="210" /> -->
+<!--           <di:waypoint x="1130" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="1078" y="192" width="52" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_DisApprove_2_di" bpmnElement="Flow_DisApprove_2"> -->
+<!--           <di:waypoint x="1050" y="185" /> -->
+<!--           <di:waypoint x="1050" y="90" /> -->
+<!--           <di:waypoint x="620" y="90" /> -->
+<!--           <di:waypoint x="620" y="170" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="806" y="72" width="69" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--         <bpmndi:BPMNEdge id="Flow_Decision_1_di" bpmnElement="Flow_Decision_1"> -->
+<!--           <di:waypoint x="690" y="210" /> -->
+<!--           <di:waypoint x="745" y="210" /> -->
+<!--           <bpmndi:BPMNLabel> -->
+<!--             <dc:Bounds x="667" y="192" width="85" height="14" /> -->
+<!--           </bpmndi:BPMNLabel> -->
+<!--         </bpmndi:BPMNEdge> -->
+<!--     </bpmndi:BPMNPlane> -->
+<!--   </bpmndi:BPMNDiagram> -->
+
+</bpmn:definitions>

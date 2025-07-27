@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>ثبت درخواست</h2>
+  <form (ngSubmit)="onSubmit()" class="process-card">
+    <mat-form-field >
+      <mat-label>نام</mat-label>
+      <input matInput [(ngModel)]="firstName" name="firstName" required>
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>نام خانوادگی</mat-label>
+      <input matInput [(ngModel)]="lastName" name="lastName" required>
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>مبلغ قرارداد</mat-label>
+      <input matInput type="number" [(ngModel)]="paymentAmount" name="paymentAmount" required>
+    </mat-form-field>
+
+    <button class="curve" mat-raised-button color="primary" type="submit">ثبت درخواست</button>
+  </form>
+  <button class="curve" mat-raised-button color="accent" [routerLink]="['/']">بازگشت</button>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</div>
+
