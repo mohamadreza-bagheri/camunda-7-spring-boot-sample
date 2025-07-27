@@ -1,0 +1,29 @@
+<mat-toolbar>
+  <button class="curve" mat-raised-button color="primary" [routerLink]="['/contracts']">
+    لیست قراردادها
+  </button>
+<!--  <button class="curve" mat-raised-button color="primary" [routerLink]="['/process-list']">-->
+<!--    مشاهده لیست فرایند ها-->
+<!--  </button>-->
+<!--  <button class="curve" mat-raised-button color="primary" [routerLink]="['/user-task-history']">-->
+<!--    تاریخچه فعالیت کاربران-->
+<!--  </button>-->
+</mat-toolbar>
+<mat-card class="process-card">
+  <mat-card-header>
+    <h3>کارهای جاری من</h3>
+  </mat-card-header>
+
+  <div *ngFor="let task of currentTasks">
+    <br>
+<!--    <button style="background-color: gainsboro" class="curve" mat-raised-button [routerLink]="['/process', task.contractId]">-->
+<!--      فرایند: {{task.contractId}}-->
+<!--    </button>-->
+    <app-task-form
+      [task]="task.task"
+      [contract]="task.contract"
+      [userName]="username"
+      (taskCompleted)="loadMyTasks()">
+    </app-task-form>
+  </div>
+</mat-card>

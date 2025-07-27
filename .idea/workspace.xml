@@ -5,26 +5,110 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0034cf5-a7d2-4252-af19-f409ba91ecff" name="Changes" comment="first push">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments-ui/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/payments-ui/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/app.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/guard/auth.guard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/auth/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/auth/login/login.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/auth/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/auth/register/register.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/auth/register/register.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/auth/register/register.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contract-data.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contract-editor/contract-editor.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contract-editor/contract-editor.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contract-editor/contract-editor.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contracts/contracts.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contracts/contracts.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/contracts/contracts.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/task-form/task-form.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/task-form/task-form.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/task-form/task-form.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/contracts/task-form/task-form.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/history/user-task-his/user-task-history.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/history/user-task-his/user-task-history.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/history/user-task-his/user-task-history.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/home/home.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/home/home.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/pages/home/home.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/services/auth.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/services/contract.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/app/services/history.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/src/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts-ui/tsconfig.spec.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="30Rpn6YMNgv6Rhp2Q96DkZyJskO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/spring-project/camunda-7-spring-boot-sample",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "ts.external.directory.path": "E:\\spring-project\\camunda-7-spring-boot-sample\\payments-ui\\node_modules\\typescript\\lib"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\spring-project\camunda-7-spring-boot-sample" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a0034cf5-a7d2-4252-af19-f409ba91ecff" name="Changes" comment="first push" />
+      <created>1753600408166</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753600408166</updated>
+      <workItem from="1753600409434" duration="162000" />
+    </task>
+    <task id="LOCAL-00001" summary="first push">
+      <option name="closed" value="true" />
+      <created>1753600477483</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753600477483</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first push" />

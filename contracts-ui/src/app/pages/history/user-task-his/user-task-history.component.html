@@ -1,0 +1,35 @@
+<div class="container">
+
+  <mat-toolbar>
+    <h2>تاریخچه فعالیت کاربر</h2>
+  </mat-toolbar>
+
+  <mat-form-field>
+    <mat-label>انتخاب کاربر</mat-label>
+    <mat-select [(ngModel)]="userId" name="userId" [multiple]="false">
+      <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button class="curve" mat-raised-button color="primary" (click)="loadHistory()">
+    مشاهده تاریخچه
+  </button>
+
+  <button class="curve" mat-raised-button color="accent" [routerLink]="['/']">
+    صفحه اصلی
+  </button>
+
+  <mat-card style="margin: 8px; border-radius: 5px; box-shadow: 3px 1px 5px darkgray" *ngFor="let history of historyList">
+    <mat-card-header>
+      <mat-card-title>فرایند :{{history.processInstanceId}}</mat-card-title>
+      <mat-card-title>تسک :{{history.taskId}}</mat-card-title>
+      <mat-card-title>عملیات :{{history.name}}</mat-card-title>
+      <mat-card-title>تاریخ شروع :{{history.startTime}}</mat-card-title>
+      <mat-card-title>تاریخ پایان :{{history.endTime}}</mat-card-title>
+      <mat-card-title>زمان(میلی ثانیه) :{{history.duration}}</mat-card-title>
+      <mat-card-title>توضیحات :{{history.description}}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</div>

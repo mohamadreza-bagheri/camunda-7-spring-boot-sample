@@ -1,0 +1,22 @@
+<div class="login-container">
+  <h2>ورود به سیستم</h2>
+  <form (ngSubmit)="onSubmit()">
+
+    <mat-form-field >
+      <mat-label>نام کاربری</mat-label>
+      <input matInput [(ngModel)]="username" name="username" required>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>رمز ورود</mat-label>
+      <input matInput [(ngModel)]="password" name="password" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">ورود</button>
+
+    <p class="register-link">
+      حساب کاربری ندارید؟
+      <a routerLink="/register">ثبت‌نام کنید</a>
+    </p>
+  </form>
+</div>

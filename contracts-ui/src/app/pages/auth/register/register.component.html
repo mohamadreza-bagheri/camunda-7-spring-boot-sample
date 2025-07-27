@@ -1,0 +1,45 @@
+<div class="register-container">
+  <h2>ثبت‌نام در سیستم</h2>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field >
+      <mat-label>نام کاربری</mat-label>
+      <input matInput [(ngModel)]="username" name="username" required>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>رمز ورود</mat-label>
+      <input matInput [(ngModel)]="password" name="password" required>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>نام</mat-label>
+      <input matInput [(ngModel)]="firstName" name="firstName" required>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>نام خانوادگی</mat-label>
+      <input matInput [(ngModel)]="lastName" name="lastName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>گروه های کاربر</mat-label>
+      <mat-select [(ngModel)]="selectedGroups" name="groups" [multiple]="true">
+        <mat-select-trigger>
+          {{selectedGroups?.[0] || ''}}
+          <span *ngIf="(selectedGroups?.length || 0) > 1" >
+        (+{{(selectedGroups?.length || 0) - 1}} {{selectedGroups?.length === 2 ? 'other' : 'others'}})
+      </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of groups" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit">ثبت ‌نام</button>
+
+    <p class="login-link">
+      قبلاً ثبت‌نام کرده‌اید؟
+      <a routerLink="/login">وارد شوید</a>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,37 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  padding: 20px;
+}
+
+.process-card {
+  margin: 7px;
+  border-radius: 5px;
+  box-shadow: 3px 1px 5px darkgray
+}
+
+.task-card {
+  margin: 7px;
+}
+
+
+.main-container {
+  direction: rtl;
+  padding: 20px;
+}
+
+.curve {
+  margin: 7px;
+  border-radius: 5px;
+  box-shadow: 3px 1px 5px darkgray
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
